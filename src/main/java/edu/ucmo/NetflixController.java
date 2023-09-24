@@ -31,19 +31,21 @@ public class NetflixController {
         return netflixRepository.save(netflix);
     }
 
-    @PutMapping("/movies/{id}")
-    public ResponseEntity<Netflix> updateNetflixMovie(@PathVariable String id, @RequestBody Netflix netflixDetails) {
-        Netflix netflix = netflixRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Netflix not exist with id :" + id));
-        netflix.setRelease_year(netflixDetails.getRelease_year());
+    @PutMapping("/movies/{title}")
+    public ResponseEntity<Netflix> updateNetflixMovie(@PathVariable String title, @RequestBody Netflix netflixDetails) throws Exception {
+        Netflix netflix = netflixRepository.findByTitle(title);
+        netflix.setId(netflixDetails.getId());
+        netflix.setTitle(netflixDetails.getTitle());
+        netflix.setDescription(netflixDetails.getDescription());
+        netflix.setRuntime(netflixDetails.getRuntime());
+        netflix.setImdb_score(netflixDetails.getImdb_score());
         Netflix updatedNetflixMovie = netflixRepository.save(netflix);
         return ResponseEntity.ok(updatedNetflixMovie);
     }
 
-    @DeleteMapping("/movies/{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteNetflixMovie(@PathVariable String id) {
-        Netflix netflix = netflixRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Department not exist with id :" + id));
+    @DeleteMapping("/movies/{title}")
+    public ResponseEntity<Map<String, Boolean>> deleteNetflixMovie(@PathVariable String title) throws Exception{
+        Netflix netflix = netflixRepository.findByTitle(title);
         netflixRepository.delete(netflix);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);

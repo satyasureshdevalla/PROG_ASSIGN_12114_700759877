@@ -13,6 +13,7 @@ public class Netflix {
     private List<String> genres;
 
     private String id;
+    private String imdb_score;
     private List<String> production_countries;
     private Integer release_year;
     private Integer runtime;
@@ -23,12 +24,13 @@ public class Netflix {
 
     }
 
-    public Netflix(String _id, String age_certification, String description, List<String> genres, String id, List<String> production_countries, Integer release_year, Integer runtime, String title, String type) {
+    public Netflix(String _id, String age_certification, String description, List<String> genres, String id, String imdb_score, List<String> production_countries, Integer release_year, Integer runtime, String title, String type) {
         this._id = _id;
         this.age_certification = age_certification;
         this.description = description;
         this.genres = genres;
         this.id = id;
+        this.imdb_score = imdb_score;
         this.production_countries = production_countries;
         this.release_year = release_year;
         this.runtime = runtime;
@@ -74,6 +76,14 @@ public class Netflix {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getImdb_score() {
+        return imdb_score;
+    }
+
+    public void setImdb_score(String imdb_score) {
+        this.imdb_score = imdb_score;
     }
 
     public List<String> getProduction_countries() {

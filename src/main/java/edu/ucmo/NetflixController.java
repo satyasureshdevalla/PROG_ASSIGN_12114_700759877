@@ -26,6 +26,12 @@ public class NetflixController {
         return netflixRepository.findAll();
     }
 
+    @GetMapping("/movie/{title}")
+    public Netflix getNetflixMovie(@PathVariable String title) throws Exception{
+        return netflixRepository.findByTitle(title);
+    }
+
+
     @PostMapping("/movie")
     public Netflix createNetflixMovie(@RequestBody Netflix netflix) {
         return netflixRepository.save(netflix);
